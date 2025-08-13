@@ -6,7 +6,9 @@ import cors from 'cors'
 const port = 3001;
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: "http://127.0.0.1:3000"
+}))
 
 const leerData =() =>{
     try{
@@ -26,19 +28,19 @@ const escribirData = (data) =>{
 };
 
 
-app.get('/libros', cors(),(req, res) =>{
+app.get('/libros',(req, res) =>{
     const data = leerData();
     res.json(data.libros)
 })
 
-app.get('/libros/:id', cors(),  (req, res) =>{
+app.get('/libros/:id', (req, res) =>{
     const data = leerData();
     const id = parseInt(req.params.id); // Con esto recupero el paramatro ID
     const libro = data.libros.find((libro) => libro.id === id);
     res.json(libro)
 });
 
-app.post('/libros', cors(), (req, res) => {
+app.post('/libros', (req, res) => {
     const data = leerData();
     const body = req.body;
     const newLibro = {
@@ -53,7 +55,7 @@ app.post('/libros', cors(), (req, res) => {
 });
 
 
-app.put("/libros/:id", cors(), (req, res) =>{
+app.put("/libros/:id", (req, res) =>{
     const data = leerData();
     const body = req.body;
     const id = parseInt(req.params.id);
@@ -67,7 +69,7 @@ app.put("/libros/:id", cors(), (req, res) =>{
     res.json({message: "Libro Actualizado Correctamente"})
 })
 
-app.delete('/libros/:id', cors(), (req, res) =>{
+app.delete('/libros/:id', (req, res) =>{
     const data = leerData();
     const id = parseInt(req.params.id);
     const libroIndex = data.libros.findIndex((libro) => libro.id === id);
