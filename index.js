@@ -26,19 +26,19 @@ const escribirData = (data) =>{
 };
 
 
-app.get('/libros',(req, res) =>{
+app.get('/libros', cors(),(req, res) =>{
     const data = leerData();
     res.json(data.libros)
 })
 
-app.get('/libros/:id', (req, res) =>{
+app.get('/libros/:id', cors(),  (req, res) =>{
     const data = leerData();
     const id = parseInt(req.params.id); // Con esto recupero el paramatro ID
     const libro = data.libros.find((libro) => libro.id === id);
     res.json(libro)
 });
 
-app.post('/libros', (req, res) => {
+app.post('/libros', cors(), (req, res) => {
     const data = leerData();
     const body = req.body;
     const newLibro = {
@@ -53,7 +53,7 @@ app.post('/libros', (req, res) => {
 });
 
 
-app.put("/libros/:id", (req, res) =>{
+app.put("/libros/:id", cors(), (req, res) =>{
     const data = leerData();
     const body = req.body;
     const id = parseInt(req.params.id);
@@ -67,7 +67,7 @@ app.put("/libros/:id", (req, res) =>{
     res.json({message: "Libro Actualizado Correctamente"})
 })
 
-app.delete('/libros/:id', (req, res) =>{
+app.delete('/libros/:id', cors(), (req, res) =>{
     const data = leerData();
     const id = parseInt(req.params.id);
     const libroIndex = data.libros.findIndex((libro) => libro.id === id);
