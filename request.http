@@ -1,0 +1,29 @@
+GET http://localhost:3001/libros HTTP/1.1
+
+###
+
+GET http://localhost:3001/libros/1 HTTP/1.1
+
+###
+
+POST http://localhost:3001/libros HTTP/1.1
+Content-Type: application/json
+
+{
+    "name" : "Los Reemplazantes",
+    "author" : "Renato Garin",
+    "year" : 1997
+}
+
+###
+PUT http://localhost:3001/libros/3 HTTP/1.1
+Content-Type: application/json
+
+{
+
+    "year" : 1999
+}
+
+###
+
+DELETE http://localhost:3001/libros/3 HTTP/1.1
