@@ -3,12 +3,13 @@ import fs from 'fs';
 import bodyParser from "body-parser";
 import cors from 'cors'
 
-const port = 3001;
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({
-    origin: "http://localhost:5173"
-}))
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+    })
+);
 
 const leerData =() =>{
     try{
@@ -77,7 +78,3 @@ app.delete('/libros/:id', (req, res) =>{
     escribirData(data);
     res.json({message: "Libro Elimnado con exito"})
 })
-
-app.listen(port, () =>{
-    console.log(`Servidor escuchado en puerto: ${port}`);
-});
